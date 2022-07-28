@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import React from "react";
 import { connect, sendMsg } from './api';
+import { Box, Button } from '@chakra-ui/react';
+import Header from './components/Header'
 
 const App = () : JSX.Element => {
   useEffect(() => {
@@ -12,9 +14,10 @@ const App = () : JSX.Element => {
   };
 
   return (
-    <div className="App">
-      <button onClick={send}>Hit</button>
-    </div>
+    <Box>
+      <Header></Header>
+      <Button onClick={send}>Hit</Button >
+    </Box>
   );
 }
 
