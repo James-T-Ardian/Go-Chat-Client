@@ -3,6 +3,7 @@ import React from "react";
 import { connect, sendMsg } from './api';
 import { Box, Button } from '@chakra-ui/react';
 import Header from './components/Header'
+import MessageContainer from './components/MessageContainer'
 
 const App = () : JSX.Element => {
   useEffect(() => {
@@ -16,6 +17,7 @@ const App = () : JSX.Element => {
   return (
     <Box>
       <Header></Header>
+      <MessageContainer></MessageContainer>
       <Button onClick={send}>Hit</Button >
     </Box>
   );
