@@ -5,6 +5,7 @@ const theme = extendTheme({
     black: '#222831',
     darkGrey: '#393E46',
     teal: '#00ADB5',
+    grey: '#ababab',
     lightGrey: '#EEEEEE'
   },
   fonts: {
