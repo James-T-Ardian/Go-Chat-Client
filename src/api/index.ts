@@ -1,15 +1,11 @@
-let socket = new WebSocket("ws://localhost:8080/ws");
+const socket = new WebSocket("ws://localhost:8080/ws");
 
-let connect = () => {
+const connect = (messageHandler: (msg: MessageEvent<any>) => any, onOpenHandler:() => any) => {
   console.log("Attempting Connection...");
 
-  socket.onopen = () => {
-    console.log("Successfully Connected");
-  };
+  socket.onopen = onOpenHandler;
 
-  socket.onmessage = msg => {
-    console.log("Obtained msg: ",  msg);
-  };
+  socket.onmessage = messageHandler;
 
   socket.onclose = event => {
     console.log("Socket Closed Connection: ", event);
@@ -20,9 +16,8 @@ let connect = () => {
   };
 };
 
-let sendMsg = (msg: string) => {
-  console.log("Sending msg: ", msg);
-  socket.send(msg);
+const sendMsg = (msg: Message) => {
+  socket.send(JSON.stringify(msg));
 };
 
 export { connect, sendMsg };
