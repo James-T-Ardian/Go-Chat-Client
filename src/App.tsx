@@ -1,21 +1,27 @@
-import { useEffect, useState } from "react";
-import React from "react";
-import { connect, sendMsg } from './api';
-import { Box, Button } from '@chakra-ui/react';
+import { useEffect, useState } from "react"
+import React from "react"
+import { connect, sendMsg } from './api'
+import { Box, Button } from '@chakra-ui/react'
 import Header from './components/Header'
 import MessageContainer from './components/MessageContainer'
-import { SendMessage, JoinRoom, GetCurrentUsername } from "./constants";
+import { SendMessage, JoinRoom, GetCurrentUsername } from "./constants"
 
 const App = () : JSX.Element => {
-  const [senderName, setSenderName] = useState('')
+  const [senderName, setSenderName] = useState<string>('')
+  const [messagesArray, setMessagesArray] = useState<Message[]>([])
+
   useEffect(() => {
     connect(messageHandler, onOpenHandler);
   }, [])
 
+  useEffect(() => {
+    console.log(messagesArray)
+  }, [messagesArray])
+
   const onOpenHandler = (): void => {
     sendMsg({
       action: GetCurrentUsername
-    });
+    })
   }
 
   const messageHandler = (msg: MessageEvent<any>): void => {
@@ -23,6 +29,8 @@ const App = () : JSX.Element => {
     console.log("message get:", jsonMsg)
     if (jsonMsg.action === GetCurrentUsername){
       setSenderName(jsonMsg.body ?? '')
+    } else {
+      setMessagesArray((prevState: Message[]) => [...prevState, jsonMsg])
     }
   }
 
