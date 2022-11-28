@@ -3,7 +3,7 @@ import React from "react"
 import { connect, sendMsg } from './api'
 import { Box, Button } from '@chakra-ui/react'
 import Header from './components/Header'
-import MessageContainer from './components/MessageContainer'
+import MessagesContainer from './components/MessageContainer'
 import { SendMessage, JoinRoom, GetCurrentUsername } from "./constants"
 
 const App = () : JSX.Element => {
@@ -13,10 +13,6 @@ const App = () : JSX.Element => {
   useEffect(() => {
     connect(messageHandler, onOpenHandler);
   }, [])
-
-  useEffect(() => {
-    console.log(messagesArray)
-  }, [messagesArray])
 
   const onOpenHandler = (): void => {
     sendMsg({
@@ -53,7 +49,7 @@ const App = () : JSX.Element => {
   return (
     <Box>
       <Header></Header>
-      <MessageContainer></MessageContainer>
+      <MessagesContainer messages={messagesArray}></MessagesContainer>
       { senderName !== '' && (
         <>
           <Button onClick={send}>Hit</Button >

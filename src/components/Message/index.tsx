@@ -1,15 +1,15 @@
 import { Box, Flex } from '@chakra-ui/react'
 
-interface IProps {
+interface MessageProps {
   children: string
   hourAndMinute: string
   poster: string
 }
-const MessageContainer: React.FC<IProps> = ({children, hourAndMinute, poster}) => {
+const Message: React.FC<MessageProps> = ({children, hourAndMinute, poster}) => {
   return (
     <Flex px='2em' py='1em' direction='column'>
       <Box className="message-bubble" maxWidth='fit-content' bgColor='darkGrey' px='1em' borderRadius='10px'>
-        <Flex className="name-and-time-container" alignItems='baseline'>
+        <Flex className="name-and-time-container" alignItems='baseline' justifyContent='space-between'>
           <Box className="message-poster" pr='1em' color='lightGrey' fontSize='xl'>{poster}</Box>
           <Box className="message-hour-and-minute" color='grey'>{hourAndMinute}</Box>
         </Flex>
@@ -19,4 +19,4 @@ const MessageContainer: React.FC<IProps> = ({children, hourAndMinute, poster}) =
   );
 }
 
-export default MessageContainer;
+export default Message;
