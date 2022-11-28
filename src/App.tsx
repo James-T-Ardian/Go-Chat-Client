@@ -6,7 +6,7 @@ import Header from './components/Header'
 import MessagesContainer from './components/MessageContainer'
 import { SendMessage, JoinRoom, GetCurrentUsername } from "./constants"
 
-const App = () : JSX.Element => {
+const App = (): JSX.Element => {
   const [senderName, setSenderName] = useState<string>('')
   const [messagesArray, setMessagesArray] = useState<Message[]>([])
 

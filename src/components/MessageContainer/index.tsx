@@ -31,7 +31,7 @@ interface MessageContainerProps {
   messages: Message[]
 }
 
-const MessagesContainer: React.FC<MessageContainerProps> = ({messages}) => {
+const MessagesContainer: React.FC<MessageContainerProps> = ({messages}): JSX.Element => {
   return (
     <Flex minWidth='max-content' borderTop= '1px solid black' gap='1em' bgColor='black' direction='column'>
       {

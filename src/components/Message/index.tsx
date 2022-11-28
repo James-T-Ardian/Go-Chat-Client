@@ -5,7 +5,7 @@ interface MessageProps {
   hourAndMinute: string
   poster: string
 }
-const Message: React.FC<MessageProps> = ({children, hourAndMinute, poster}) => {
+const Message: React.FC<MessageProps> = ({children, hourAndMinute, poster}): JSX.Element => {
   return (
     <Flex px='2em' py='1em' direction='column'>
       <Box className="message-bubble" maxWidth='fit-content' bgColor='darkGrey' px='1em' borderRadius='10px'>

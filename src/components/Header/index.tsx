@@ -1,6 +1,6 @@
 import { Flex, Box, Heading, Spacer } from '@chakra-ui/react'
 
-const Header = () => {
+const Header = (): JSX.Element => {
   return (
     <Flex minWidth='max-content' alignItems='center' gap='1em' color='lightGrey' bgColor='black'>
       <Box px='2em' py='1em'>
