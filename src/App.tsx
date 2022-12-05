@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import React from "react"
 import { connect, sendMsg } from './api'
-import { Box, Button } from '@chakra-ui/react'
+import { Box, Button, Flex } from '@chakra-ui/react'
 import Header from './components/Header'
-import MessagesContainer from './components/MessageContainer'
+import MessagesContainer from './components/MessagesContainer'
 import { SendMessage, JoinRoom, GetCurrentUsername } from "./constants"
 
 const App = (): JSX.Element => {
@@ -47,17 +47,18 @@ const App = (): JSX.Element => {
   };
 
   return (
-    <Box>
+    <Flex direction='column' minHeight='100vh' bgColor='black' justifyContent='flex-start'>
       <Header></Header>
       <MessagesContainer messages={messagesArray}></MessagesContainer>
       { senderName !== '' && (
         <>
-          <Button onClick={send}>Hit</Button >
-          <Button onClick={join}>join room</Button >
+          <Box>
+            <Button onClick={send}>Hit</Button>
+            <Button onClick={join}>join room</Button >
+          </Box>
         </>
       )}
-
-    </Box>
+    </Flex>
   );
 }
 
