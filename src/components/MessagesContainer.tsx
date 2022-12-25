@@ -1,9 +1,9 @@
 import { Flex } from '@chakra-ui/react'
-import Message from '../Message'
+import Message from './Message'
 
 // twentyFourHourStandardTimestamp must always be in the form of hh:mm where h is hour and m is minute
 const convertToTwelveHourStandard = (twentyFourHourStandardTimestamp: string): string => {
-  const hoursInTwentyFourHoursStandard: number | undefined = parseInt(twentyFourHourStandardTimestamp.slice(0,2))
+  const hoursInTwentyFourHoursStandard: number | undefined = parseInt(twentyFourHourStandardTimestamp.slice(0, 2))
 
   if (hoursInTwentyFourHoursStandard < 0 || hoursInTwentyFourHoursStandard > 23) {
     return 'undefined'
@@ -13,7 +13,7 @@ const convertToTwelveHourStandard = (twentyFourHourStandardTimestamp: string): s
   let hoursInTwelveHoursStandard: number
   let amOrPM: string
 
-  if (hoursInTwentyFourHoursStandard == 12) {
+  if (hoursInTwentyFourHoursStandard === 12) {
     amOrPM = 'PM'
     hoursInTwelveHoursStandard = hoursInTwentyFourHoursStandard
   } else if (hoursInTwentyFourHoursStandard / 12 > 0) {
@@ -31,9 +31,9 @@ interface MessageContainerProps {
   messages: Message[]
 }
 
-const MessagesContainer: React.FC<MessageContainerProps> = ({messages}): JSX.Element => {
+const MessagesContainer: React.FC<MessageContainerProps> = ({ messages }: MessageContainerProps): JSX.Element => {
   return (
-    <Flex minWidth='max-content' borderTop= '1px solid black' gap='1em' bgColor='black' direction='column' overflowY='scroll'>
+    <Flex minHeight= '90vh' minWidth='max-content' borderTop= '1px solid black' gap='1em' bgColor='black' direction='column' overflowY='scroll'>
       {
         messages.map((message: Message) => {
           return (
@@ -44,7 +44,7 @@ const MessagesContainer: React.FC<MessageContainerProps> = ({messages}): JSX.Ele
         })
       }
     </Flex>
-  );
+  )
 }
 
-export default MessagesContainer;
+export default MessagesContainer
