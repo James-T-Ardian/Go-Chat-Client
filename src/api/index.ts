@@ -7,17 +7,17 @@ const connect = (messageHandler: (msg: MessageEvent<any>) => void, onOpenHandler
 
   socket.onmessage = messageHandler
 
-  socket.onclose = (event: CloseEvent) => {
+  socket.onclose = (event: CloseEvent): void => {
     console.log('Socket Closed Connection: ', event)
   }
 
-  socket.onerror = (error: Event) => {
+  socket.onerror = (error: Event): void => {
     console.log('Socket Error: ', error)
   }
 }
 
-const sendMsg = (msg: Message) => {
+const sendMessageWS = (msg: Message): void => {
   socket.send(JSON.stringify(msg))
 }
 
-export { connect, sendMsg }
+export { connect, sendMessageWS }

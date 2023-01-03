@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-
-import { connect, sendMsg } from './api'
+import { connect, sendMessageWS } from './api'
 import { Box, Button, Flex } from '@chakra-ui/react'
 import Header from './components/Header'
 import MessagesContainer from './components/MessagesContainer'
 import { SendMessage, JoinRoom, GetCurrentUsername } from './constants'
+import InputGroup, { InputSendHandler } from './components/InputGroup'
 
 const App = (): JSX.Element => {
   const [senderName, setSenderName] = useState<string>('')
@@ -15,7 +15,7 @@ const App = (): JSX.Element => {
   }, [])
 
   const onOpenHandler = (): void => {
-    sendMsg({
+    sendMessageWS({
       action: GetCurrentUsername
     })
   }
@@ -30,17 +30,19 @@ const App = (): JSX.Element => {
     }
   }
 
-  const send: React.MouseEventHandler<HTMLButtonElement> = (): void => {
-    sendMsg({
-      action: SendMessage,
-      sender: senderName,
-      body: 'Hellow World',
-      target: 'asdf'
-    })
+  const sendMessage: InputSendHandler = (messageText: string): React.MouseEventHandler<HTMLButtonElement> => {
+    return (): void => {
+      sendMessageWS({
+        action: SendMessage,
+        sender: senderName,
+        body: messageText,
+        target: 'asdf'
+      })
+    }
   }
 
-  const join: React.MouseEventHandler<HTMLButtonElement> = (): void => {
-    sendMsg({
+  const joinRoom: React.MouseEventHandler<HTMLButtonElement> = (): void => {
+    sendMessageWS({
       action: JoinRoom,
       target: 'asdf'
     })
@@ -53,8 +55,8 @@ const App = (): JSX.Element => {
       { senderName !== '' && (
         <>
           <Box>
-            <Button onClick={send}>Hit</Button>
-            <Button onClick={join}>join room</Button >
+            <InputGroup onInputSend={sendMessage} inputButtonText='Send' textInputPlaceholder='Type your message here'/>
+            <Button onClick={joinRoom}>join room</Button >
           </Box>
         </>
       )}
