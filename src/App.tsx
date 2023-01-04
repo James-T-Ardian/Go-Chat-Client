@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect, sendMessageWS } from './api'
-import { Box, Button, Flex } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import Header from './components/Header'
 import MessagesContainer from './components/MessagesContainer'
 import { SendMessage, JoinRoom, GetCurrentUsername } from './constants'
@@ -41,11 +41,13 @@ const App = (): JSX.Element => {
     }
   }
 
-  const joinRoom: React.MouseEventHandler<HTMLButtonElement> = (): void => {
-    sendMessageWS({
-      action: JoinRoom,
-      target: 'asdf'
-    })
+  const joinRoom: InputSendHandler = (roomName: string): React.MouseEventHandler<HTMLButtonElement> => {
+    return (): void => {
+      sendMessageWS({
+        action: JoinRoom,
+        target: roomName
+      })
+    }
   }
 
   return (
@@ -56,7 +58,7 @@ const App = (): JSX.Element => {
         <>
           <Box>
             <InputGroup onInputSend={sendMessage} inputButtonText='Send' textInputPlaceholder='Type your message here'/>
-            <Button onClick={joinRoom}>join room</Button >
+            <InputGroup onInputSend={joinRoom} inputButtonText='Join' textInputPlaceholder='Type the room you want to join here'/>
           </Box>
         </>
       )}
