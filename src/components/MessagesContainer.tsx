@@ -33,7 +33,7 @@ interface MessageContainerProps {
 
 const MessagesContainer: React.FC<MessageContainerProps> = ({ messages }: MessageContainerProps): JSX.Element => {
   return (
-    <Flex minHeight= '90vh' minWidth='max-content' borderTop= '1px solid black' gap='1em' bgColor='black' direction='column' overflowY='scroll'>
+    <Flex minHeight= '90vh' minWidth='max-content' gap='1em' bgColor='black' direction='column' overflowY='scroll'>
       {
         messages.map((message: Message) => {
           return (

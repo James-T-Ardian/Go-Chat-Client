@@ -43,6 +43,7 @@ const App = (): JSX.Element => {
 
   const joinRoom: InputSendHandler = (roomName: string): React.MouseEventHandler<HTMLButtonElement> => {
     return (): void => {
+      setMessagesArray([])
       sendMessageWS({
         action: JoinRoom,
         target: roomName
@@ -56,7 +57,7 @@ const App = (): JSX.Element => {
       <MessagesContainer messages={messagesArray}></MessagesContainer>
       { senderName !== '' && (
         <>
-          <Box>
+          <Box bgColor="black">
             <InputGroup onInputSend={sendMessage} inputButtonText='Send' textInputPlaceholder='Type your message here'/>
             <InputGroup onInputSend={joinRoom} inputButtonText='Join' textInputPlaceholder='Type the room you want to join here'/>
           </Box>

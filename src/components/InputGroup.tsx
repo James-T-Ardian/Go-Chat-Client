@@ -17,9 +17,9 @@ const InputGroup: React.FC<InputGroupProps> = ({ onInputSend, textInputPlacehold
 
   return (
     <>
-      <Flex>
-        <Input placeholder={textInputPlaceholder} size='md' color='white' onChange={onTextChange} maxWidth='800px' minWidth='400px' width='35vw'/>
-        <Button onClick={onInputSend(inputText)}>{inputButtonText}</Button>
+      <Flex margin='10px 0px'>
+        <Input margin= '0px 10px' placeholder={textInputPlaceholder} size='md' color='white' onChange={onTextChange} maxWidth='800px' minWidth='400px' width='35vw'/>
+        <Button width='max-content' minWidth='100px' onClick={onInputSend(inputText)}>{inputButtonText}</Button>
       </Flex>
     </>
 
