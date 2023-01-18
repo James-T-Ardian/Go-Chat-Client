@@ -9,6 +9,7 @@ import InputGroup, { InputSendHandler } from './components/InputGroup'
 const App = (): JSX.Element => {
   const [senderName, setSenderName] = useState<string>('')
   const [messagesArray, setMessagesArray] = useState<Message[]>([])
+  const [roomName, setRoomName] = useState<string>('')
 
   useEffect(() => {
     connect(messageHandler, onOpenHandler)
@@ -48,12 +49,13 @@ const App = (): JSX.Element => {
         action: JoinRoom,
         target: roomName
       })
+      setRoomName(roomName)
     }
   }
 
   return (
     <Flex direction='column' minHeight='100vh' bgColor='black' justifyContent='flex-start'>
-      <Header></Header>
+      <Header roomName={roomName}></Header>
       <MessagesContainer messages={messagesArray}></MessagesContainer>
       { senderName !== '' && (
         <>
