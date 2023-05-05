@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { connect, sendMessageWS } from './api'
-import { Box, Flex } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 import Header from './components/Header'
 import MessagesContainer from './components/MessagesContainer'
 import { SendMessage, JoinRoom, GetCurrentUsername } from './constants'
 import InputGroup, { InputSendHandler } from './components/InputGroup'
 
 const App = (): JSX.Element => {
-  const [senderName, setSenderName] = useState<string>('')
+  const [userName, setUserName] = useState<string>('')
   const [messagesArray, setMessagesArray] = useState<Message[]>([])
   const [roomName, setRoomName] = useState<string>('')
 
@@ -25,7 +25,7 @@ const App = (): JSX.Element => {
     const jsonMsg: Message = JSON.parse(msg.data ?? '{}')
     console.log('message get:', jsonMsg)
     if (jsonMsg.action === GetCurrentUsername) {
-      setSenderName(jsonMsg.body ?? '')
+      setUserName(jsonMsg.body ?? '')
     } else {
       setMessagesArray((prevState: Message[]) => [...prevState, jsonMsg])
     }
@@ -35,7 +35,7 @@ const App = (): JSX.Element => {
     return (): void => {
       sendMessageWS({
         action: SendMessage,
-        sender: senderName,
+        sender: userName,
         body: messageText,
         target: 'asdf'
       })
@@ -54,15 +54,15 @@ const App = (): JSX.Element => {
   }
 
   return (
-    <Flex direction='column' minHeight='100vh' bgColor='black' justifyContent='flex-start'>
+    <Flex direction='column' height='100%' bgColor='black' justifyContent='center' alignItems='center' width='100%'>
       <Header roomName={roomName}></Header>
-      <MessagesContainer messages={messagesArray}></MessagesContainer>
-      { senderName !== '' && (
+      <MessagesContainer userName= {userName} messages={messagesArray}></MessagesContainer>
+      { userName !== '' && (
         <>
-          <Box bgColor="black">
+          <Flex bgColor="black" width='50vw' direction='column' justifyContent='center' alignItems='center'>
             <InputGroup onInputSend={sendMessage} inputButtonText='Send' textInputPlaceholder='Type your message here'/>
             <InputGroup onInputSend={joinRoom} inputButtonText='Join' textInputPlaceholder='Type the room you want to join here'/>
-          </Box>
+          </Flex>
         </>
       )}
     </Flex>

@@ -29,15 +29,23 @@ const convertToTwelveHourStandard = (twentyFourHourStandardTimestamp: string): s
 
 interface MessageContainerProps {
   messages: Message[]
+  userName: string
 }
 
-const MessagesContainer: React.FC<MessageContainerProps> = ({ messages }: MessageContainerProps): JSX.Element => {
+const MessagesContainer: React.FC<MessageContainerProps> = ({ messages, userName }: MessageContainerProps): JSX.Element => {
   return (
-    <Flex minHeight= '90vh' minWidth='max-content' gap='1em' bgColor='black' direction='column' overflowY='scroll'>
+    <Flex height='75vh' minWidth='max-content' width='50vw' gap='1em' bgColor='black' direction='column' overflowY='scroll' css={{
+      '&::-webkit-scrollbar': {
+        width: 0,
+        height: 0
+      },
+      'scrollbar-width': 'none',
+      '-ms-overflow-style': 'none'
+    }}>
       {
         messages.map((message: Message) => {
           return (
-            <Message hourAndMinute={convertToTwelveHourStandard(message.timeStamp?.slice(11, 16) ?? '')} poster={message.sender ?? ''}>
+            <Message userName={userName} hourAndMinute={convertToTwelveHourStandard(message.timeStamp?.slice(11, 16) ?? '')} poster={message.sender ?? ''}>
               {message.body as string}
             </Message>
           )

@@ -14,6 +14,7 @@ plugins:
 rules: {
   "@typescript-eslint/explicit-function-return-type": "off",
   "@typescript-eslint/no-non-null-assertion": "off",
+  "@typescript-eslint/strict-boolean-expressions": "off",
   "react/jsx-key": "warn",
   "react/react-in-jsx-scope": "off",
   "quotes": [2, "single", { "avoidEscape": true }]

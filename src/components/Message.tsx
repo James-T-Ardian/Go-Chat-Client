@@ -4,10 +4,11 @@ interface MessageProps {
   children: string
   hourAndMinute: string
   poster: string
+  userName: string
 }
-const Message: React.FC<MessageProps> = ({ children, hourAndMinute, poster }: MessageProps): JSX.Element => {
+const Message: React.FC<MessageProps> = ({ children, hourAndMinute, poster, userName }: MessageProps): JSX.Element => {
   return (
-    <Flex px='2em' py='1em' direction='column'>
+    <Flex px='2em' py='1em' direction='column' marginLeft={userName === poster ? 'auto' : 'none'}>
       <Box className="message-bubble" maxWidth='fit-content' bgColor='darkGrey' px='1em' borderRadius='10px'>
         <Flex className="name-and-time-container" alignItems='baseline' justifyContent='space-between'>
           <Box className="message-poster" pr='1em' color='lightGrey' fontSize='xl'>{poster}</Box>

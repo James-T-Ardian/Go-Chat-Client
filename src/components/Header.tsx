@@ -6,10 +6,11 @@ interface HeaderProps {
 
 const Header = ({ roomName }: HeaderProps): JSX.Element => {
   return (
-    <Flex minWidth='max-content' borderBottom= '1px solid black' alignItems='center' gap='1em' color='lightGrey' bgColor='black' minHeight='max-content'>
-      <Flex px='2em' py='1em'>
-        <Heading size='lg'>Go Chat</Heading>
-        <Heading size='lg'>You are currently in {roomName}</Heading>
+    <Flex width='100%' borderBottom= '1px solid black' alignItems='center' gap='1em' color='lightGrey' bgColor='black' minHeight='max-content'>
+      <Flex px='2em' py='1em' width='100%' alignItems='center' justifyContent='space-between'>
+        <Heading size='lg' width='20%'>Go Chat</Heading>
+        <Heading size='lg'>{roomName ? `Room: ${roomName}` : ''}</Heading>
+        <Heading size='lg'width='20%'>  </Heading>
       </Flex>
       <Spacer />
     </Flex>
