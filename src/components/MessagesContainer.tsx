@@ -34,7 +34,7 @@ interface MessageContainerProps {
 
 const MessagesContainer: React.FC<MessageContainerProps> = ({ messages, userName }: MessageContainerProps): JSX.Element => {
   return (
-    <Flex height='75vh' minWidth='max-content' width='50vw' gap='1em' bgColor='black' direction='column' overflowY='scroll' css={{
+    <Flex height='75vh' minWidth='max-content' width='70vw' gap='1em' bgColor='black' direction='column' overflowY='scroll' css={{
       '&::-webkit-scrollbar': {
         width: 0,
         height: 0

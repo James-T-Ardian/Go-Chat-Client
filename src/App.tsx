@@ -3,7 +3,7 @@ import { connect, sendMessageWS } from './api'
 import { Flex } from '@chakra-ui/react'
 import Header from './components/Header'
 import MessagesContainer from './components/MessagesContainer'
-import { SendMessage, JoinRoom, GetCurrentUsername } from './constants'
+import { SendMessage, JoinRoom, GetCurrentUsername, LeaveRoom } from './constants'
 import InputGroup, { InputSendHandler } from './components/InputGroup'
 
 const App = (): JSX.Element => {
@@ -42,14 +42,21 @@ const App = (): JSX.Element => {
     }
   }
 
-  const joinRoom: InputSendHandler = (roomName: string): React.MouseEventHandler<HTMLButtonElement> => {
+  const joinRoom: InputSendHandler = (newRoomName: string): React.MouseEventHandler<HTMLButtonElement> => {
     return (): void => {
       setMessagesArray([])
+      if (roomName) {
+        console.log('foo')
+        sendMessageWS({
+          action: LeaveRoom,
+          target: roomName
+        })
+      }
       sendMessageWS({
         action: JoinRoom,
-        target: roomName
+        target: newRoomName
       })
-      setRoomName(roomName)
+      setRoomName(newRoomName)
     }
   }
 
